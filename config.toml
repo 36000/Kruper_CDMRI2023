@@ -1,0 +1,50 @@
+[DATA]
+brain_mask_definition = "GQImage()"
+bundle_info = """
+BundleDict({
+        "left_OT_OC": {
+            "include": [
+                "~/AFQ_data/visual/left_OT_1.nii.gz",
+                "~/AFQ_data/visual/left_OT_0.nii.gz",
+                "~/AFQ_data/visual/left_ON_0.nii.gz"],
+            "bundlesection": {
+                "left_OT": (0, 1),
+                "left_OC": (1, 2)
+            }, "curvature": {"path": "~/AFQ_data/visual/left_OTOC_curve.trk", "thresh": 20, "cut": True},
+            "qb_thresh": 6
+        },
+        "right_OT_OC": {
+            "include": [
+                "~/AFQ_data/visual/right_OT_1.nii.gz",
+                "~/AFQ_data/visual/right_OT_0.nii.gz",
+                "~/AFQ_data/visual/right_ON_0.nii.gz"],
+            "bundlesection": {
+                "right_OT": (0, 1),
+                "right_OC": (1, 2)
+            }, "curvature": {"path": "~/AFQ_data/visual/right_OTOC_curve.trk", "thresh": 20, "cut": True},
+            "qb_thresh": 6
+        }
+})
+"""
+
+[SEGMENTATION]
+scalars = "['gq_aso', 'gq_iso', 'gq_pmap']"
+[TRACTOGRAPHY]
+tractography_ngpus = 1
+
+[TRACTOGRAPHY_PARAMS]
+seed_mask = "RoiImage(tissue_property='gq_pmap', tissue_property_threshold=50)"
+seed_threshold = 100
+stop_mask = "ScalarImage('gq_pmap')"
+stop_threshold = 70
+thresholds_as_percentages = true
+n_seeds = 20
+max_angle = 60
+
+[CLEANING_PARAMS]
+distance_threshold = 2
+length_threshold = 3
+
+[BIDS_PARAMS]
+bids_path = TODO
+preproc_pipeline = TODO
